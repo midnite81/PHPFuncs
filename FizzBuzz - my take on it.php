@@ -1,6 +1,7 @@
 <?
 /* 
-This is my take on the infamous FizzBuzz test. There are many different ways you can do it, whether transactionally or whether you do it in a more modular way for change of business logic at a later stage
+This is my take on the infamous FizzBuzz test. There are many different ways you can do it, 
+whether transactionally or whether you do it in a more modular way for change of business logic at a later stage
 */
 
 
