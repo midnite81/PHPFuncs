@@ -46,6 +46,30 @@ public function oneNatoWordPerLine($word) {
 	return $word;
 }
 
+public function reverseNatoConvert($natowords) { 
+	$natowords = @explode(" ",trim($natowords)); 
+	$natoKeys = array_keys($this->nato);
+	$natoreturn = array();
+		
+	foreach($natowords as $n) { 
+		if (in_array(ucwords(strtolower($n)),$this->nato)) {
+			$natoreturn[] = array_search(ucwords(strtolower($n)),$this->nato);
+			
+		} 
+		else { 
+			if (strtolower($n) == "(space)") {
+				$natoreturn[] = " "; 	
+			}
+			else {
+				$natoreturn[] = " _" . $n . "_ ";
+			}
+			
+		} 
+	} 
+	
+	return implode("",$natoreturn);
+} 
+
 }
 ?>
 
@@ -54,13 +78,19 @@ public function oneNatoWordPerLine($word) {
 
 $n = new Nato;
 $word = (isset($_GET['word'])) ? $_GET['word'] : '';
+$reverse = (isset($_GET['reverse'])) ? $_GET['reverse'] : '';
 $string = $n->convertToNato($word); 
 $string_newline = $n->oneNatoWordPerLine($word); 
+$string_nato = $n->reverseNatoConvert($reverse);
 ?>
 
 <form method="get" action="<?= $_SERVER['PHP_SELF'] ?>">
 <label for="word">Enter string to convert:</label><input type="text" name="word" id="word" value="<?= $word ?>">
 <button type="submit">Convert String</button>
+</form>
+<form method="get" action="<?= $_SERVER['PHP_SELF'] ?>">
+<label for="reverse">Reverse Nato String:</label><input type="text" name="reverse" id="reverse" value="<?= $reverse ?>">
+<button type="submit">Convert Nato String</button>
 </form>
 
 <div style="margin-bottom: 10px;">
@@ -71,4 +101,9 @@ $string_newline = $n->oneNatoWordPerLine($word);
 <div style="margin-bottom: 10px;">
 <p><b>Converted string (one word per line):</b></p>
 <p><?= $string_newline . PHP_EOL ?></p>
+</div>
+
+<div style="margin-bottom: 10px;">
+<p><b>Reverse Nato String:</b></p>
+<p><?= $string_nato . PHP_EOL ?></p>
 </div>
