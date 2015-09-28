@@ -1,0 +1,8 @@
+# If you want to use Laravel or Lumen on shared hosting and you are unable to 
+# change the root to public, simply place this file in the root laravel folder
+# and rename it to .htaccess
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
