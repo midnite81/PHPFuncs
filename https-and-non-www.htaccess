@@ -1,0 +1,7 @@
+# Redirect non-www addresses...
+RewriteCond %{HTTP_HOST} !^(www\.example\.com)?$
+RewriteRule (.*) https://www.example.com/$1 [R=301,L]
+
+# Force to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://www.example.com/$1 [R=301,L]
